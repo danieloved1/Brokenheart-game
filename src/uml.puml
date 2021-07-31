@@ -1,0 +1,119 @@
+@startuml
+'https://plantuml.com/class-diagram
+class Cards{
+  +final Suits suit;
+  +final Ranks rank;
+  public Suits getSuit()
+  public Ranks getRank()
+  public boolean equals(Object o)
+  public int compareTo(final Card other)
+  public String getShortName()
+  public String getFullName()
+  public String toString()
+  }
+  class Round{
+      +int[] score;
+      +Seats nextLead;
+      +private Deck deck;
+      +private ArrayList<Trick> tricks;
+      +private int roundNumber;
+      +private int p;
+      public int[] getScore()
+      private void passThreeCards()
+      private void printPlayers()
+      public void play()
+  }
+  class Deck{
+  + final ArrayList<Card> cards
+  public Deck()
+  public void shuffle()
+  public Card giveCard()
+   public boolean isEmpty()
+   public String toString()
+}
+class Game{
+    + ArrayList<Player> players;
+    + int score;
+     public Game()
+     public void play()
+     public String toString()
+}
+enum Seats{
+    North,
+    East,
+    South,
+    West;
+    public static Seats fromOrdinal()
+    public Seats next()
+}
+class Player{
+    + String name;
+    + int score;
+    + Hand hand;
+    + Seats seat;
+    public Hand getHand()
+    public int getScore()
+    public void setScore()
+    public Seats getSeat()
+    public String toString()
+
+}
+enum Suits{
+        Clubs,
+        Diamonds,
+        Spades,
+        Hearts;
+        Suits(char unicodeSymbol)
+        public char getSymbol() {
+}
+class Trick{
+public Trick()
+public ArrayList<Card> getCards()
+ public Suits getLeadSuit()
+ public int whichPlayerLost()
+ public void add()
+ public String toString()
+}
+class Hand{
+ + final Set<Card> cards = new TreeSet<>
+
+ public Card getCard()
+  public void takeCard(Card card)
+  public Card dropCard(int cardNumber)
+  public boolean equalDuce()
+  public boolean checkSuitExist(Suits leadSuit)
+  public String toString()
+  public boolean checkNonSameSuit(Suits leadsuit)
+
+}
+enum Ranks{
+Deuce,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King,
+    Ace;
+    public String getSymbol()
+    Ranks(char oneChar)
+
+}
+
+Cards<|--Suits
+Cards<|-- Ranks
+Player<|--Seats
+Player<|--Hand
+Round<|-- Deck
+Cards<|-- Deck
+Round<|-- Trick
+Game<|-- Player
+Game*-- Round
+
+
+@enduml
